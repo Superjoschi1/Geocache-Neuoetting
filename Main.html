@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: blue;
+      text-align: center;
+      padding: 20px;
+    }
+    .box {
+      background: white;
+      padding: 20px;
+      margin: 15px auto;
+      border-radius: 10px;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 10px;
+      margin-top: 10px;
+      width: 80%;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #007BFF;
+      color: white;
+    }
+    #result {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Quiz</h1>
+
+<div class="box">
+ <p> Die Ursprünge von Alt- und neuötting reichen bis ins 8.-10Jh. zurück</p>
+</div>
+
+<div class="box">
+  <p> 1. Die ursprünge des alten Öttings gehen auf das 8.-10.Jh zurück.
+      Nach der Zerstörung im 10.Jh wurde alt- und Neuötting bewusst getrennt aufgebaut.
+      Dies Siedlung um altötting konzetrierte sich auf die Wahlfahrt, während neuötting als Handelsstadt aufgebaut wurde. </p>
+</div>
+<div class="box">
+  <p>1. Mit was wurde in Neuötting gehandelt. </p>
+  <input id="q1" placeholder="Antwort eingeben">
+</div>
+<div class="box">
+  <p> Der Bau der Stadtpfarkirche st. Nikolaus wurde von 1410-1492 errichtet.
+      Es habdelt sich um eine spätgothische hhallen Kirche.
+  </p>
+</div>
+<div class="box">
+  <p>Der neuöttinger bahnhof befinded sich im Ortsteil Eisenfelden und wurde 1871 in Betrieb genommen.
+     von 1906 und 1930 war der Neuöttinger Bahnhof mit dem Altöttinger mit einem Verkehrsmittel.
+  </p>
+</div>
+
+<div class="box">
+  <p>2. wie wird die Kirche noch genannt? </p>
+  <input id="q2" placeholder="Antwort eingeben">
+</div>
+<div class="box">
+  <p>Der neuöttinger bahnhof befinded sich im Ortsteil Eisenfelden und wurde 1871 in Betrieb genommen.
+     von 1906 und 1930 war der Neuöttinger Bahnhof mit dem Altöttinger mit einem Verkehrsmittel.
+  </p>
+</div>
+
+<div class="box">
+  <p>3. Mit welchem verkehrsmittel </p>
+  <input id="q3" placeholder="Antwort eingeben">
+</div>
+<div class="box">
+  <p>4. neuötting entwickelte sich ab 13Jh zu einem wichigem hadelszentrum, das von den bayrischen herzögen gefördert wurde.</p>
+</div>
+<div class="box">
+  <p>4. wie hies das herscher geschlecht</p>
+  <input id="q4" placeholder="Antwort eingeben">
+</div>
+<div class="box">
+  <p>5. Die anfänge von Alt- und Neuötting im 8.-10.Jh waren gemeinsam. wie wurde die Stadt früher auf latein genannt?</p>
+  <input id="q5" placeholder="Antwort eingeben">
+</div>
+<button onclick="checkAnswers()">Antworten prüfen</button>
+
+<div id="result"></div>
+
+<script>
+function checkAnswers() {
+  let score = 0;
+
+  let a1 = document.getElementById("q1").value;
+  let a2 = document.getElementById("q2").value;
+  let a3 = document.getElementById("q3").value;
+  let a4 = document.getElementById("q4").value;
+  let a5 = document.getElementById("q5").value;
+
+  if (a1 === "Salz") score++;
+  if (a1 === "Getreide") score++;
+  if (a2 === "Dom des Inntals") score++;
+  if (a3 === "Dampfstrasenbahn") score++;
+  if (a4 === "wittelsbacher") score++;
+  if (a5 === "Autingas") score++,
+  if (a5 === "Oettinga") score++;
+  if (score === 5) {
+  document.getElementById("result").innerHTML =
+    "Koordinaten: 123Xy kauf mir elektronik";
+} else {
+  document.getElementById("result").innerHTML =
+    "Du hast " + score + " von 5 richtig!";
+}
+}
+</script>
+
+</body>
+</html>
