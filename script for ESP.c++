@@ -118,6 +118,7 @@ function checkAnswers() {
   if (a2 === "Dom des Inntals") score++;
   if (a2 === "Dom") score++;
   if (a3 === "Dampfstrasenbahn") score++;
+  if (a3 === "Dampfstraßenbahn") score++;
   if (a4 === "Wittelsbacher") score++;
   if (a4 === "Die Wittelbacher") score++;
   if (a5 === "Autingas") score++;
