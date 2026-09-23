@@ -2,8 +2,8 @@
 #include <ESP8266WebServer.h>
 
 // ESP als Access Point konfigurieren
-const char* ap_ssid = "GeocacheESP";
-const char* ap_password = "12345678"; // mindestens 8 Zeichen
+const char* ap_ssid = "Historisches Neuötting";
+const char* ap_password = "Neuötting"; // mindestens 8 Zeichen
 
 ESP8266WebServer server(80);
 
