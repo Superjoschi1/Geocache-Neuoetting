@@ -80,26 +80,22 @@
 
 <h1>Historisches Neuötting</h1>
 
-
-<!-- Einleitung -->
-
 <div class="box">
-  <p>
-    Die Ursprünge von Alt- und Neuötting reichen bis ins
-    8.-10. Jahrhundert zurück.
+
+  <p class="question">
+    1. Die Anfänge von Alt- und Neuötting im 8. Jh.
+    waren gemeinsam. Wie wurde der besiedelte Ort früher auf lateinisch genannt?
   </p>
+
+  <input id="q1" type="text">
+
 </div>
 
-
-<!-- Frage 1 -->
-
 <div class="box">
 
   <p>
-    Die Ursprünge des alten Öttings gehen auf das
-    8.-10. Jh. zurück.
-    Nach der Zerstörung im 10. Jh. wurde Alt- und Neuötting
-    bewusst getrennt aufgebaut.
+    Nach der Zerstörung durch einen Stadtbrand im 10. Jh. wurde Alt- und Neuötting
+    bewusst getrennt voneinander aufgebaut.
     Die Siedlung um Altötting konzentrierte sich auf die Wallfahrt,
     während Neuötting als Handelsstadt aufgebaut wurde.
   </p>
@@ -110,25 +106,18 @@
 <div class="box">
 
   <p class="question">
-    1. Mit was wurde in Neuötting gehandelt?
+    2. Mit was wurde in Neuötting gehandelt?
   </p>
 
-  <input
-    id="q1"
-    type="text"
-    placeholder="Antwort eingeben"
-    autocomplete="off"
-  >
+  <input id="q2" type="text">
 
 </div>
 
 
-<!-- Kirche -->
-
 <div class="box">
 
   <p>
-    Der Bau der Stadtpfarrkirche St. Nikolaus wurde
+    Die Stadtpfarrkirche St. Nikolaus wurde
     von 1410-1492 errichtet.
     Es handelt sich um eine spätgotische Hallenkirche.
   </p>
@@ -136,57 +125,39 @@
 </div>
 
 
-<!-- Frage 2 -->
-
 <div class="box">
 
   <p class="question">
-    2. Wie wird die Kirche noch genannt?
+    3. Wie wird die Stadtpfarrkirche St. Nikolaus auch genannt? 
   </p>
 
-  <input
-    id="q2"
-    type="text"
-    placeholder="Antwort eingeben"
-    autocomplete="off"
-  >
+  <input id="q3" type="text">
 
 </div>
 
-
-<!-- Bahnhof -->
 
 <div class="box">
 
   <p>
     Der Neuöttinger Bahnhof befindet sich im Ortsteil Eisenfelden
     und wurde 1871 in Betrieb genommen.
-    Von 1906 bis 1930 war der Neuöttinger Bahnhof mit Altötting
-    mit einem Verkehrsmittel verbunden.
+    Von 1906 bis 1930 verband ein Verkerhsmittel den Bahnhof Neuötting mit Altötting.
+
   </p>
 
 </div>
 
-
-<!-- Frage 3 -->
 
 <div class="box">
 
   <p class="question">
-    3. Mit welchem Verkehrsmittel?
+    4. Welches Verkehrsmittel verband den Bahnhof Neuötting mit Altötting?
   </p>
 
-  <input
-    id="q3"
-    type="text"
-    placeholder="Antwort eingeben"
-    autocomplete="off"
-  >
+  <input id="q4" type="text">
 
 </div>
 
-
-<!-- Frage 4 -->
 
 <div class="box">
 
@@ -202,46 +173,21 @@
 <div class="box">
 
   <p class="question">
-    4. Wie hieß das Herrschergeschlecht?
+    5. Wie hieß das Herrschergeschlecht?
   </p>
 
-  <input
-    id="q4"
-    type="text"
-    placeholder="Antwort eingeben"
-    autocomplete="off"
-  >
+  <input id="q5" type="text">
 
 </div>
 
 
-<!-- Frage 5 -->
 
-<div class="box">
-
-  <p class="question">
-    5. Die Anfänge von Alt- und Neuötting im 8.-10. Jh.
-    waren gemeinsam. Wie wurde die Stadt früher auf Latein genannt?
-  </p>
-
-  <input
-    id="q5"
-    type="text"
-    placeholder="Antwort eingeben"
-    autocomplete="off"
-  >
-
-</div>
-
-
-<!-- Button -->
 
 <button onclick="checkAnswers()">
   Antworten prüfen
 </button>
 
 
-<!-- Ergebnis -->
 
 <div id="result"></div>
 
@@ -273,41 +219,47 @@ function checkAnswers() {
     .trim()
     .toLowerCase();
 
-
+  
+  if (
+    a1 === "autingas" ||
+    a1 === "oettinga"
+  ) {
+    score++;
+  }
 
   if (
-    a1 === "salz" ||
-    a1 === "getreide"
+    a2 === "salz" ||
+    a2 === "getreide" ||
+    a2 === "salz und getreide" ||
+    a2 === "wein" ||
+    a2 === "venezianerware" ||
+    a2 === "holz" ||
+    a2 === "erze" ||
+    a2 === "holz und erze" ||
+    a2 === "getreide und salz" 
   ) {
     score++;
   }
 
 
   if (
-    a2 === "dom des inntals" ||
-    a2 === "dom"
+    a3 === "dom des inntals" ||
+    a3 === "dom"
   ) {
     score++;
   }
 
   if (
-    a3 === "dampfstrasenbahn" ||
-    a3 === "dampfstraßenbahn"
-  ) {
-    score++;
-  }
-
-
-  if (
-    a4 === "wittelsbacher"
+    a4 === "dampfstrassenbahn" ||
+    a4 === "dampfstraßenbahn" ||
+    a4 === "bockerl" 
   ) {
     score++;
   }
 
 
   if (
-    a5 === "autingas" ||
-    a5 === "oettinga"
+    a5 === "wittelsbacher"
   ) {
     score++;
   }
@@ -316,9 +268,10 @@ function checkAnswers() {
   if (score === 5) {
 
     document.getElementById("result").innerHTML =
-      "<b>Alle Antworten richtig!</b><br><br>" +
-      "Koordinaten: N 48° 14,595'   O 12° 40,092'<br>";
-
+      "<b>Alle Antworten richtig!</b><br>" +
+      "Du hast <b>" + score + " von 5</b> richtig!<br><br>" +
+      "Koordinaten: 48°14'35.8\"N 12°40'05.5\"E<br>";
+    
   }
 
   else {
