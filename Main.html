@@ -4,122 +4,444 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quiz</title>
   <style>
+    :root {
+      --bg-1: #ecfdf5;
+      --bg-2: #dff6ff;
+      --bg-3: #e0f2fe;
+      --panel: rgba(255, 255, 255, 0.9);
+      --panel-alt: #f8fafc;
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --accent: #0ea5e9;
+      --text: #18312d;
+      --muted: #4b5f5a;
+      --success: #0f766e;
+      --error: #b91c1c;
+      --shadow: rgba(16, 185, 129, 0.15);
+      --border: rgba(16, 185, 129, 0.15);
+      --terrain: #d9f99d;
+      --path: #a7f3d0;
+      --gold: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial;
-      background: rgb(94, 94, 117);
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 35%, var(--bg-3));
       text-align: center;
-      padding: 20px;
+      padding: 30px 16px 50px;
+      color: var(--text);
     }
-    .box {
-      background: white;
-      padding: 20px;
-      margin: 15px auto;
-      border-radius: 10px;
-      max-width: 400px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    .page-shell {
+      max-width: 720px;
+      margin: 0 auto;
     }
-    input {
-      padding: 10px;
-      margin-top: 10px;
-      width: 80%;
-      font-size: 16px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      background: #007BFF;
+
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(14, 165, 233, 0.8));
+      border-radius: 22px;
+      padding: 24px 20px 18px;
+      box-shadow: 0 18px 35px rgba(16, 185, 129, 0.22);
       color: white;
+      margin-bottom: 18px;
+      overflow: hidden;
     }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .hero::before {
+      width: 180px;
+      height: 180px;
+      right: -30px;
+      top: -50px;
+    }
+
+    .hero::after {
+      width: 120px;
+      height: 120px;
+      left: -20px;
+      bottom: -30px;
+    }
+
+    .hero-badges {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .badge.accent {
+      background: rgba(250, 204, 21, 0.18);
+      border-color: rgba(250, 204, 21, 0.35);
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      margin: 8px 0 0;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.95;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 620px;
+      margin: 0 auto 18px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(16, 185, 129, 0.18);
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.08);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.12);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.75; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .score-badge {
+      background: linear-gradient(180deg, rgba(250, 204, 21, 0.18), rgba(250, 204, 21, 0.06));
+      color: var(--text);
+      border: 1px solid rgba(250, 204, 21, 0.4);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .map-track {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      max-width: 620px;
+      margin: 0 auto 18px;
+    }
+
+    .checkpoint {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.7);
+      border: 2px solid rgba(14, 165, 233, 0.22);
+      color: var(--muted);
+      font-weight: 800;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.65);
+      transition: all 0.2s ease;
+    }
+
+    .checkpoint.done {
+      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+      border-color: rgba(255,255,255,0.8);
+      color: white;
+      box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.16);
+    }
+
+    .box {
+      background: linear-gradient(180deg, var(--panel), var(--panel-alt));
+      padding: 22px 20px;
+      margin: 18px auto;
+      border-radius: 18px;
+      max-width: 620px;
+      box-shadow: 0 12px 28px var(--shadow);
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+
+    .box p {
+      margin: 0;
+      line-height: 1.7;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .question {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.4;
+      font-size: 1.06rem;
+    }
+
+    input {
+      padding: 14px 15px;
+      margin-top: 10px;
+      width: 100%;
+      font-size: 16px;
+      border: 1px solid #badfd1;
+      border-radius: 12px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 26px auto 0;
+      max-width: 620px;
+    }
+
+    button {
+      padding: 13px 22px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+      color: white;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 10px 18px rgba(16, 185, 129, 0.24);
+      font-weight: 700;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .secondary {
+      background: linear-gradient(180deg, #64748b, #475569);
+      box-shadow: 0 10px 18px rgba(71, 85, 105, 0.18);
+    }
+
     #result {
-      font-size: 20px;
-      margin-top: 20px;
+      font-size: clamp(1.05rem, 2vw, 1.5rem);
+      margin-top: 26px;
+      min-height: 28px;
+      font-weight: 800;
+      color: var(--text);
+      text-align: center;
+      background: rgba(255,255,255,0.45);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: inline-block;
+      max-width: 620px;
+      width: 100%;
+    }
+
+    #result.success {
+      color: var(--success);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    #result.error {
+      color: var(--error);
+      background: rgba(185, 28, 28, 0.08);
     }
   </style>
 </head>
 
 <body>
 
-<h1>Quiz</h1>
+<div class="page-shell">
+  <div class="hero">
+    <div class="hero-badges">
+      <span class="badge">Cache #47</span>
+      <span class="badge accent">Tipp: Folge den Spuren</span>
+    </div>
+    <h1>Quest</h1>
+    <p class="subtitle">Geo-Quiz: Alt- &amp; Neuötting</p>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-pill"><span class="dot"></span> Fortschritt</div>
+    <div id="score-badge" class="score-badge">Punkte: 0/5</div>
+  </div>
+
+  <div class="map-track" aria-label="Checkpoints">
+    <span class="checkpoint">1</span>
+    <span class="checkpoint">2</span>
+    <span class="checkpoint">3</span>
+    <span class="checkpoint">4</span>
+    <span class="checkpoint">5</span>
+  </div>
+
+  <div class="box">
+    <p>Die Ursprünge von Alt- und Neuötting reichen bis ins 8.-10. Jh. zurück.</p>
+  </div>
 
 <div class="box">
- <p> Die Ursprünge von Alt- und Neuötting reichen bis ins 8.-10Jh. zurück</p>
+  <p>1. Die Ursprünge des alten Öttings gehen auf das 8.-10. Jh. zurück. Nach der Zerstörung im 10. Jh. wurde Alt- und Neuötting bewusst getrennt voneinander aufgebaut. Diese Siedlung um Altötting konzentrierte sich auf die Wallfahrt, während Neuötting als Handelsstadt aufgebaut wurde.</p>
 </div>
 
 <div class="box">
-  <p> 1. Die Ursprünge des alten Öttings gehen auf das 8.-10.Jh zurück.  
-      Nach der Zerstörung im 10.Jh wurde Alt- und Neuötting bewusst getrennt voneinander aufgebaut.
-      Dies Siedlung um Altötting konzetrierte sich auf die Wahlfahrt, während Neuötting als Handelsstadt aufgebaut wurde. </p>
-</div>
-<div class="box">
-  <p>1. Mit was wurde in Neuötting gehandelt. </p>
-  <input id="q1" placeholder="Antwort eingeben">
-</div>
-<div class="box">
-  <p> Der Bau der Stadtpfarkirche St. Nikolaus wurde von 1410-1492 errichtet.
-      Es habdelt sich um eine spätgothische Hallenkirche.
-  </p>
-</div>
-
-
-<div class="box">
-  <p>2. Wie wird die Kirche noch genannt? </p>
-  <input id="q2" placeholder="Antwort eingeben">
-</div>
-<div class="box">
-  <p>Der Neuöttinger Bahnhof befinded sich im Ortsteil Eisenfelden und wurde 1871 in Betrieb genommen.
-     Von 1906 und 1930 war der Neuöttinger Bahnhof mit dem Altöttinger mit Hilfe eines Verkehrsmittel verbunden.
-  </p>
+  <label class="question" for="q1">1. Mit was wurde in Neuötting gehandelt?</label>
+  <input id="q1" placeholder="Antwort eingeben" aria-label="Antwort zu Frage 1">
 </div>
 
 <div class="box">
-  <p>3. Mit welchem Verkehrsmittel </p>
-  <input id="q3" placeholder="Antwort eingeben">
+  <p>Der Bau der Stadtpfarrkirche St. Nikolaus wurde von 1410-1492 errichtet. Es handelt sich um eine spätgotische Hallenkirche.</p>
 </div>
-<div class="box">
-  <p>4. Neuötting entwickelte sich ab dem 13.Jh zu einem wichigem Handelszentrum, das von den bayrischen Herzögen gefördert wurde.</p>
-</div>
-<div class="box">
-  <p>4. Wie hieß das Herschergeschlecht</p>
-  <input id="q4" placeholder="Antwort eingeben">
-</div>
-<div class="box">
-  <p>5. Die Anfänge von Alt- und Neuötting im 8.-10.Jh waren gemeinsam. Wie wurde die Stadt früher auf lateinisch genannt?</p>
-  <input id="q5" placeholder="Antwort eingeben">
-</div>
-<button onclick="checkAnswers()">Antworten prüfen</button>
 
-<div id="result"></div>
+<div class="box">
+  <label class="question" for="q2">2. Wie wird die Kirche noch genannt?</label>
+  <input id="q2" placeholder="Antwort eingeben" aria-label="Antwort zu Frage 2">
+</div>
+
+<div class="box">
+  <p>Der Neuöttinger Bahnhof befindet sich im Ortsteil Eisenfelden und wurde 1871 in Betrieb genommen. Von 1906 bis 1930 war der Neuöttinger Bahnhof mit dem Altöttinger mit Hilfe eines Verkehrsmittels verbunden.</p>
+</div>
+
+<div class="box">
+  <label class="question" for="q3">3. Mit welchem Verkehrsmittel?</label>
+  <input id="q3" placeholder="Antwort eingeben" aria-label="Antwort zu Frage 3">
+</div>
+
+<div class="box">
+  <p>4. Neuötting entwickelte sich ab dem 13. Jh. zu einem wichtigen Handelszentrum, das von den bayerischen Herzögen gefördert wurde.</p>
+</div>
+
+<div class="box">
+  <label class="question" for="q4">4. Wie hieß das Herrschergeschlecht?</label>
+  <input id="q4" placeholder="Antwort eingeben" aria-label="Antwort zu Frage 4">
+</div>
+
+<div class="box">
+  <label class="question" for="q5">5. Die Anfänge von Alt- und Neuötting im 8.-10. Jh. waren gemeinsam. Wie wurde die Stadt früher auf Lateinisch genannt?</label>
+  <input id="q5" placeholder="Antwort eingeben" aria-label="Antwort zu Frage 5">
+</div>
+
+<div class="actions">
+  <button onclick="checkAnswers()">Antworten prüfen</button>
+  <button class="secondary" type="button" onclick="resetQuiz()">Zurücksetzen</button>
+</div>
+
+  <div id="result" aria-live="polite"></div>
+</div>
 
 <script>
+const acceptedAnswers = [
+  ["salz", "getreide"],
+  ["dom des inntals", "dom"],
+  ["dampfstrassenbahn"],
+  ["wittelsbacher", "die wittelbacher"],
+  ["autingas", "oettinga"]
+];
+
+const checkpoints = Array.from(document.querySelectorAll('.checkpoint'));
+const scoreBadge = document.getElementById('score-badge');
+
+function normalize(value) {
+  return value.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function updateScoreDisplay(score) {
+  scoreBadge.textContent = 'Punkte: ' + score + '/5';
+  checkpoints.forEach((checkpoint, index) => {
+    checkpoint.classList.toggle('done', index < score);
+  });
+}
+
+function setResult(message, type = '') {
+  const resultBox = document.getElementById('result');
+  resultBox.textContent = message;
+  resultBox.className = type;
+}
+
 function checkAnswers() {
   let score = 0;
 
-  let a1 = document.getElementById("q1").value;
-  let a2 = document.getElementById("q2").value;
-  let a3 = document.getElementById("q3").value;
-  let a4 = document.getElementById("q4").value;
-  let a5 = document.getElementById("q5").value;
+  for (let i = 0; i < acceptedAnswers.length; i++) {
+    const answer = normalize(document.getElementById('q' + (i + 1)).value);
+    if (acceptedAnswers[i].includes(answer)) {
+      score++;
+    }
+  }
 
-  if (a1 === "Salz") score++;
-  if (a1 === "Getreide") score++;
-  if (a2 === "Dom des Inntals") score++;
-  if (a2 === "Dom") score++;
-  if (a3 === "Dampfstrassenbahn") score++;
-  if (a4 === "Wittelsbacher") score++;
-  if (a4 === "Die Wittelbacher") score++;
-  if (a5 === "Autingas") score++;
-  if (a5 === "Oettinga") score++;
+  updateScoreDisplay(score);
+
   if (score === 5) {
-  document.getElementById("result").innerHTML =
-    "Koordinaten: N 48° 14,595'   O 12° 40,092'";
-} else {
-  document.getElementById("result").innerHTML =
-    "Du hast " + score + " von 5 richtig!";
+    setResult('Cache gefunden! Koordinaten: N 48° 14,595\'   O 12° 40,092\'', 'success');
+  } else {
+    setResult('Du hast ' + score + ' von 5 richtig!', 'error');
+  }
 }
+
+function resetQuiz() {
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById('q' + i).value = '';
+  }
+  updateScoreDisplay(0);
+  setResult('');
 }
+
+updateScoreDisplay(0);
 </script>
 
 </body>
