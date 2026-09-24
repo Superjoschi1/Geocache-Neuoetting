@@ -2,7 +2,7 @@
 #include <ESP8266WebServer.h>
 
 const char* ap_ssid = "Historisches Neuötting";
-const char* ap_password = "Neuötting"; 
+const char* ap_password = "Bayern"; 
 
 ESP8266WebServer server(80);
 
