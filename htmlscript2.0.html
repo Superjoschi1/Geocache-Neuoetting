@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Historisches Neuötting</title>
+
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background: rgb(94, 94, 117);
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      color: white;
+      margin-bottom: 25px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      margin: 15px auto;
+      border-radius: 10px;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .question {
+      font-weight: bold;
+    }
+
+    input {
+      box-sizing: border-box;
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin-top: 15px;
+      margin-bottom: 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:active {
+      background: #0056b3;
+    }
+
+    #result {
+      font-size: 20px;
+      margin: 20px auto;
+      padding: 15px;
+      max-width: 400px;
+      background: white;
+      border-radius: 10px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<h1>Historisches Neuötting</h1>
+
+
+<!-- Einleitung -->
+
+<div class="box">
+  <p>
+    Die Ursprünge von Alt- und Neuötting reichen bis ins
+    8.-10. Jahrhundert zurück.
+  </p>
+</div>
+
+
+<!-- Frage 1 -->
+
+<div class="box">
+
+  <p>
+    Die Ursprünge des alten Öttings gehen auf das
+    8.-10. Jh. zurück.
+    Nach der Zerstörung im 10. Jh. wurde Alt- und Neuötting
+    bewusst getrennt aufgebaut.
+    Die Siedlung um Altötting konzentrierte sich auf die Wallfahrt,
+    während Neuötting als Handelsstadt aufgebaut wurde.
+  </p>
+
+</div>
+
+
+<div class="box">
+
+  <p class="question">
+    1. Mit was wurde in Neuötting gehandelt?
+  </p>
+
+  <input
+    id="q1"
+    type="text"
+    placeholder="Antwort eingeben"
+    autocomplete="off"
+  >
+
+</div>
+
+
+<!-- Kirche -->
+
+<div class="box">
+
+  <p>
+    Der Bau der Stadtpfarrkirche St. Nikolaus wurde
+    von 1410-1492 errichtet.
+    Es handelt sich um eine spätgotische Hallenkirche.
+  </p>
+
+</div>
+
+
+<!-- Frage 2 -->
+
+<div class="box">
+
+  <p class="question">
+    2. Wie wird die Kirche noch genannt?
+  </p>
+
+  <input
+    id="q2"
+    type="text"
+    placeholder="Antwort eingeben"
+    autocomplete="off"
+  >
+
+</div>
+
+
+<!-- Bahnhof -->
+
+<div class="box">
+
+  <p>
+    Der Neuöttinger Bahnhof befindet sich im Ortsteil Eisenfelden
+    und wurde 1871 in Betrieb genommen.
+    Von 1906 bis 1930 war der Neuöttinger Bahnhof mit Altötting
+    mit einem Verkehrsmittel verbunden.
+  </p>
+
+</div>
+
+
+<!-- Frage 3 -->
+
+<div class="box">
+
+  <p class="question">
+    3. Mit welchem Verkehrsmittel?
+  </p>
+
+  <input
+    id="q3"
+    type="text"
+    placeholder="Antwort eingeben"
+    autocomplete="off"
+  >
+
+</div>
+
+
+<!-- Frage 4 -->
+
+<div class="box">
+
+  <p>
+    4. Neuötting entwickelte sich ab dem 13. Jh.
+    zu einem wichtigen Handelszentrum,
+    das von den bayrischen Herzögen gefördert wurde.
+  </p>
+
+</div>
+
+
+<div class="box">
+
+  <p class="question">
+    4. Wie hieß das Herrschergeschlecht?
+  </p>
+
+  <input
+    id="q4"
+    type="text"
+    placeholder="Antwort eingeben"
+    autocomplete="off"
+  >
+
+</div>
+
+
+<!-- Frage 5 -->
+
+<div class="box">
+
+  <p class="question">
+    5. Die Anfänge von Alt- und Neuötting im 8.-10. Jh.
+    waren gemeinsam. Wie wurde die Stadt früher auf Latein genannt?
+  </p>
+
+  <input
+    id="q5"
+    type="text"
+    placeholder="Antwort eingeben"
+    autocomplete="off"
+  >
+
+</div>
+
+
+<!-- Button -->
+
+<button onclick="checkAnswers()">
+  Antworten prüfen
+</button>
+
+
+<!-- Ergebnis -->
+
+<div id="result"></div>
+
+
+<script>
+
+function checkAnswers() {
+
+  let score = 0;
+
+
+  let a1 = document.getElementById("q1").value
+    .trim()
+    .toLowerCase();
+
+  let a2 = document.getElementById("q2").value
+    .trim()
+    .toLowerCase();
+
+  let a3 = document.getElementById("q3").value
+    .trim()
+    .toLowerCase();
+
+  let a4 = document.getElementById("q4").value
+    .trim()
+    .toLowerCase();
+
+  let a5 = document.getElementById("q5").value
+    .trim()
+    .toLowerCase();
+
+
+
+  if (
+    a1 === "salz" ||
+    a1 === "getreide"
+  ) {
+    score++;
+  }
+
+
+  if (
+    a2 === "dom des inntals" ||
+    a2 === "dom"
+  ) {
+    score++;
+  }
+
+  if (
+    a3 === "dampfstrasenbahn" ||
+    a3 === "dampfstraßenbahn"
+  ) {
+    score++;
+  }
+
+
+  if (
+    a4 === "wittelsbacher"
+  ) {
+    score++;
+  }
+
+
+  if (
+    a5 === "autingas" ||
+    a5 === "oettinga"
+  ) {
+    score++;
+  }
+
+
+  if (score === 5) {
+
+    document.getElementById("result").innerHTML =
+      "<b>Alle Antworten richtig!</b><br><br>" +
+      "Koordinaten: N 48° 14,595'   O 12° 40,092'<br>";
+
+  }
+
+  else {
+
+    document.getElementById("result").innerHTML =
+      "Du hast <b>" + score + " von 5</b> richtig!";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
